@@ -1,0 +1,2 @@
+# DPManager
+ClassAbstractToManagerQuerysFromMysql
