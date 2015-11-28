@@ -60,6 +60,14 @@ include "./DPManager-Basic.php";
  * buildUpdateQuery     Construye cadena    UPDATE TABLA SET CAMPO = '%s', CAMPO = '%s'
  *                                          WHERE CAMPO = '%s'
  * 
+ * 
+ */
+
+/*
+ * Build Datos to update Query
+ * 
+ * // Output : CAMPO1 = 'Valor 1' ,CAMPO2 = 'Valor 2' ,CAMPO3 = 'Valor 3' 
+ * 
  */
 
 $larFields = array();
@@ -69,74 +77,86 @@ $larFields['CAMPO3'] = " 'Valor 3' ";
 
 $lstUpdateQuery = DPManager::buildDatosToUpdate($larFields);
 
+echo "<h1>Build Update Set Query</h1>";
 echo $lstUpdateQuery;
-
-/*
- * Resultado
- * 
- * CAMPO1 = 'Valor 1' ,CAMPO2 = 'Valor 2' ,CAMPO3 = 'Valor 3' 
- */
 
 /*
  * Select Query Query Example 1
  * inicializando todos los parametros
+ * 
+ * // Output : SELECT 'Valor 1' , 'Valor 2' , 'Valor 3' FROM NOMBRE_TABLA WHERE CAMPO = 'cadena' LIMIT 0, 10
+ * 
  */
 
 $lstSelectQuery = DPManager::buildSelectQuery(
                 implode(",", $larFields), "NOMBRE_TABLA", "CAMPO = 'cadena' ", false, false, false, "LIMIT 0, 10"
 );
 
-echo "<br />";
+echo "<h1>Build Simple Select from correct params</h1>";
 echo $lstSelectQuery;
 
 /*
  * Select Query Query Example 2
  * con agrupamiento
+ * 
+ * // Output : SELECT sum(CAMPO) FROM NOMBRE_TABLA WHERE CAMPO = 'cadena' GROUP BY CAMPO
+ * 
  */
 
 $lstSelectQuery2 = DPManager::buildSelectQuery(
                 "sum(CAMPO)", "NOMBRE_TABLA", "CAMPO = 'cadena' ", "CAMPO"
 );
 
-echo "<br />";
+echo "<h1>Build group Query From correct params</h1>";
 echo $lstSelectQuery2;
 
 /*
  * Select Query Query Example 3
  * con Ordenamiento
+ * 
+ * Output : SELECT 'Valor 1' , 'Valor 2' , 'Valor 3' FROM NOMBRE_TABLA WHERE CAMPO = 'cadena' ORDER BY CAMPO DESC
  */
 
 $lstSelectQuery3 = DPManager::buildSelectQuery(
                 implode(",", $larFields), "NOMBRE_TABLA", "CAMPO = 'cadena' ", false, "CAMPO", "DESC"
 );
 
-echo "<br />";
+echo "<h1>Build Simple Query From Order By Params</h1>";
 echo $lstSelectQuery3;
 
 /*
  * DELETE Query Example 1
+ * 
+ * Output : DELETE FROM NOMBRE_TABLA WHERE CAMPO = 'cadena' 
+ * 
  */
 
 $lstDeleteQuery1 = DPManager::buildDeleteQuery("NOMBRE_TABLA", "CAMPO = 'cadena' ");
 
-echo "<br />";
+echo "<h1>Build Simple Delete Query From Params</h1>";
 echo $lstDeleteQuery1;
 
 /*
  * INSERT Query Example 1
+ * 
+ * Output : INSERT INTO NOMBRE_TABLA ( CAMPO1,CAMPO2,CAMPO3) VALUES ( 'Valor 1' , 'Valor 2' , 'Valor 3' )
+ * 
  */
 
 $lstInsertQuery1 = DPManager::buildInsertQuery($larFields, "NOMBRE_TABLA");
 
-echo "<br />";
+echo "<h1>Build Simple Insert Data From Params array type and table name</h1>";
 echo $lstInsertQuery1;
 
 /*
  * UPDATE Query Example 1
  * Para este ejemplo, necesitamos construir el SET con DPManager::buildDatosToUpdate($larFields);
+ * 
+ * Output : UPDATE NOMBRE_TABLA SET CAMPO1 = 'Valor 1' ,CAMPO2 = 'Valor 2' ,CAMPO3 = 'Valor 3' WHERE CAMPO = 'valor' 
+ * 
  */
 
 $lstUpdateQuery1 = DPManager::buildUpdateQuery("NOMBRE_TABLA", $lstUpdateQuery, "CAMPO = 'valor' ");
 
-echo "<br />";
+echo "<h1>Build Simple Update From Params array type, table name and condition to affect rows</h1>";
 echo $lstUpdateQuery1;
