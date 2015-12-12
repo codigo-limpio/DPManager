@@ -60,7 +60,6 @@ include "./DPManager-Basic.php";
  * buildUpdateQuery     Construye cadena    UPDATE TABLA SET CAMPO = '%s', CAMPO = '%s'
  *                                          WHERE CAMPO = '%s'
  * 
- * 
  */
 
 /*
