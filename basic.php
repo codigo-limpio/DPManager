@@ -48,7 +48,7 @@
  */
 include "./DPManager-Basic.php";
 
-/*
+/**
  * Ejemplos
  * 
  * buildDatosToUpdate   Construye cadena    CAMPO = '$valor', CAMPO = '$valor'
@@ -62,7 +62,7 @@ include "./DPManager-Basic.php";
  * 
  */
 
-/*
+/**
  * Build Datos to update Query
  * 
  * // Output : CAMPO1 = 'Valor 1' ,CAMPO2 = 'Valor 2' ,CAMPO3 = 'Valor 3' 
@@ -79,7 +79,7 @@ $lstUpdateQuery = DPManager::buildDatosToUpdate($larFields);
 echo "<h1>Build Update Set Query</h1>";
 echo $lstUpdateQuery;
 
-/*
+/**
  * Select Query Query Example 1
  * inicializando todos los parametros
  * 
@@ -94,7 +94,7 @@ $lstSelectQuery = DPManager::buildSelectQuery(
 echo "<h1>Build Simple Select from correct params</h1>";
 echo $lstSelectQuery;
 
-/*
+/**
  * Select Query Query Example 2
  * con agrupamiento
  * 
@@ -109,7 +109,7 @@ $lstSelectQuery2 = DPManager::buildSelectQuery(
 echo "<h1>Build group Query From correct params</h1>";
 echo $lstSelectQuery2;
 
-/*
+/**
  * Select Query Query Example 3
  * con Ordenamiento
  * 
@@ -123,7 +123,7 @@ $lstSelectQuery3 = DPManager::buildSelectQuery(
 echo "<h1>Build Simple Query From Order By Params</h1>";
 echo $lstSelectQuery3;
 
-/*
+/**
  * DELETE Query Example 1
  * 
  * Output : DELETE FROM NOMBRE_TABLA WHERE CAMPO = 'cadena' 
@@ -135,7 +135,7 @@ $lstDeleteQuery1 = DPManager::buildDeleteQuery("NOMBRE_TABLA", "CAMPO = 'cadena'
 echo "<h1>Build Simple Delete Query From Params</h1>";
 echo $lstDeleteQuery1;
 
-/*
+/**
  * INSERT Query Example 1
  * 
  * Output : INSERT INTO NOMBRE_TABLA ( CAMPO1,CAMPO2,CAMPO3) VALUES ( 'Valor 1' , 'Valor 2' , 'Valor 3' )
@@ -147,7 +147,7 @@ $lstInsertQuery1 = DPManager::buildInsertQuery($larFields, "NOMBRE_TABLA");
 echo "<h1>Build Simple Insert Data From Params array type and table name</h1>";
 echo $lstInsertQuery1;
 
-/*
+/**
  * UPDATE Query Example 1
  * Para este ejemplo, necesitamos construir el SET con DPManager::buildDatosToUpdate($larFields);
  * 
@@ -159,3 +159,27 @@ $lstUpdateQuery1 = DPManager::buildUpdateQuery("NOMBRE_TABLA", $lstUpdateQuery, 
 
 echo "<h1>Build Simple Update From Params array type, table name and condition to affect rows</h1>";
 echo $lstUpdateQuery1;
+
+
+/**
+ * Poder iterar resultados de base de datos, Object u Array aplicando un metodo
+ * de regreso
+ * @param array 
+ */
+
+$array = array(array(1, 2), array(3, 4));
+$result = DPManager::iteraRecord($array, function() {
+
+    $row = func_get_args();
+    
+    $uno = $row[0] . "UNO";
+    $dos = $row[1] . "DOS";
+
+    return array($uno, $dos);
+});
+
+echo "<h1>Aplicaci&oacute;n de m&eacute;todo anonimo a cada uno "
+. "de los elementos del objeto o arreglo</h1>";
+echo "<pre>";
+print_r($result);
+echo "</pre>";
